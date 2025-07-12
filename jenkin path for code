@@ -7,7 +7,7 @@ pipeline{
     stages{
         stage('Checkout Code'){
             steps{
-                git 'https://github.com/Surya-the-creater/pro_py.git'
+                git 'https://github.com/Surya-the-creater/simple-java-maven-app.git'
             }
         }
         stage('Compile Code'){
