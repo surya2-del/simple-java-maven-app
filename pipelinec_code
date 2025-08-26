@@ -1,0 +1,44 @@
+pipeline{
+
+    agent any
+    tools{
+        maven 'mymaven'
+    }
+    stages{
+        stage('checkout code')
+        {
+            steps{ 
+            git 'https://github.com/Sonal0409/DevOpsCodeDemo.git'
+        }
+        }
+
+    stage('Test the code'){
+        steps{
+            sh 'mvn test'
+        }
+
+    }
+    stage('build the code'){
+        steps{
+            sh 'mvn package'
+        }
+    }
+    
+     stage('Build the Image'){
+        steps{
+            sh 'docker build -t myimageaddressbook:$BUILD_NUMBER .'
+        }
+    }
+    stage('push the image dockerhub'){
+        // use plugin withCredentials
+    }
+    
+    
+     stage('Deploy the code'){
+        steps{
+            sh 'docker run -d -P myimageaddressbook:$BUILD_NUMBER'
+        }
+    }
+    }
+}
+
